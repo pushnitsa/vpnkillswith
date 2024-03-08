@@ -30,8 +30,8 @@ partial class Form1
     {
         button1 = new Button();
         groupBox1 = new GroupBox();
-        checkBox1 = new CheckBox();
         label1 = new Label();
+        checkBox1 = new CheckBox();
         groupBox1.SuspendLayout();
         SuspendLayout();
         // 
@@ -60,6 +60,15 @@ partial class Form1
         groupBox1.TabStop = false;
         groupBox1.Text = "Proxy server";
         // 
+        // label1
+        // 
+        label1.AutoSize = true;
+        label1.Location = new Point(3, 75);
+        label1.Name = "label1";
+        label1.Size = new Size(89, 15);
+        label1.TabIndex = 3;
+        label1.Text = "Status: Stopped";
+        // 
         // checkBox1
         // 
         checkBox1.AutoSize = true;
@@ -73,15 +82,6 @@ partial class Form1
         checkBox1.Text = "system default";
         checkBox1.UseVisualStyleBackColor = true;
         // 
-        // label1
-        // 
-        label1.AutoSize = true;
-        label1.Location = new Point(3, 75);
-        label1.Name = "label1";
-        label1.Size = new Size(89, 15);
-        label1.TabIndex = 3;
-        label1.Text = "Status: Stopped";
-        // 
         // Form1
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
@@ -89,6 +89,7 @@ partial class Form1
         ClientSize = new Size(242, 115);
         Controls.Add(groupBox1);
         Margin = new Padding(3, 2, 3, 2);
+        MaximizeBox = false;
         Name = "Form1";
         Text = "VpnKillSwitch";
         groupBox1.ResumeLayout(false);
