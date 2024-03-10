@@ -32,6 +32,7 @@ partial class Form1
         groupBox1 = new GroupBox();
         label1 = new Label();
         checkBox1 = new CheckBox();
+        button2 = new Button();
         groupBox1.SuspendLayout();
         SuspendLayout();
         // 
@@ -82,11 +83,22 @@ partial class Form1
         checkBox1.Text = "system default";
         checkBox1.UseVisualStyleBackColor = true;
         // 
+        // button2
+        // 
+        button2.Location = new Point(54, 165);
+        button2.Name = "button2";
+        button2.Size = new Size(75, 23);
+        button2.TabIndex = 3;
+        button2.Text = "button2";
+        button2.UseVisualStyleBackColor = true;
+        button2.Click += button2_Click;
+        // 
         // Form1
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
-        ClientSize = new Size(242, 115);
+        ClientSize = new Size(488, 303);
+        Controls.Add(button2);
         Controls.Add(groupBox1);
         Margin = new Padding(3, 2, 3, 2);
         MaximizeBox = false;
@@ -102,4 +114,5 @@ partial class Form1
     private GroupBox groupBox1;
     private CheckBox checkBox1;
     private Label label1;
+    private Button button2;
 }
