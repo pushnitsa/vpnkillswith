@@ -13,9 +13,9 @@ var host = Host
 var services = host.Services;
 
 ApplicationConfiguration.Initialize();
-Application.Run(services.GetRequiredService<Form1>());
+Application.Run(services.GetRequiredService<MainForm>());
 
 static void ConfigureServices(IServiceCollection services)
 {
-    services.AddTransient<Form1>();
+    services.AddTransient<MainForm>();
 }
