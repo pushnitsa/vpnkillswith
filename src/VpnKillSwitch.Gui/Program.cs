@@ -6,9 +6,9 @@ Thread.CurrentThread.SetApartmentState(ApartmentState.Unknown);
 Thread.CurrentThread.SetApartmentState(ApartmentState.STA);
 
 var host = Host
-            .CreateDefaultBuilder()
-            .ConfigureServices(ConfigureServices)
-            .Build();
+    .CreateDefaultBuilder()
+    .ConfigureServices(ConfigureServices)
+    .Build();
 
 var services = host.Services;
 
