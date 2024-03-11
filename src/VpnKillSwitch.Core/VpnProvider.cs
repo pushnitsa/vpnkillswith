@@ -40,7 +40,7 @@ public class VpnProvider : IVpnProvider
         var error = await process.StandardError.ReadToEndAsync();
         var exitCode = process.ExitCode;
 
-        var result = output.Trim().Split(Environment.NewLine).Select(x => x.Trim()).Where(x => x.StartsWith("Name"));
+        var result = output.Trim().Split(Environment.NewLine).Where(x => x.StartsWith("Name"));
 
         result = result.Select(x => Regex.Match(x, "(Name\\s+:)(.+)").Groups[2].Value.Trim());
 
