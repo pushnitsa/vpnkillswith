@@ -1,44 +1,27 @@
 ﻿using System.Collections.Immutable;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
 
 namespace VpnKillSwitch.Core;
 public class VpnProvider : IVpnProvider
 {
+    private readonly Func<IProcess> _processFactory;
+
+    public VpnProvider(Func<IProcess> processFactory)
+    {
+        _processFactory = processFactory;
+    }
     public async Task<bool> ConnectAsync(string connection)
     {
-        using var process = new Process();
-        process.StartInfo.FileName = "cmd.exe";
-        process.StartInfo.Arguments = $"/c rasdial \"{connection}\"";
-        process.StartInfo.CreateNoWindow = true;
-        process.StartInfo.RedirectStandardOutput = true;
-        process.StartInfo.RedirectStandardError = true;
-
-        process.Start();
-
-        await process.WaitForExitAsync();
-
-        var result = await process.StandardOutput.ReadToEndAsync();
+        var process = _processFactory();
+        await process.ExecuteAsync("cmd.exe", "/c rasdial", connection);
 
         return true;
     }
 
     public async Task<IReadOnlyCollection<string>> GetConnectionsAsync()
     {
-        using var process = new Process();
-        process.StartInfo.FileName = "powershell.exe";
-        process.StartInfo.Arguments = "-Command Get-VpnConnection";
-        process.StartInfo.CreateNoWindow = true;
-        process.StartInfo.RedirectStandardOutput = true;
-        process.StartInfo.RedirectStandardError = true;
-
-        process.Start();
-
-        await process.WaitForExitAsync();
-
-        var output = await process.StandardOutput.ReadToEndAsync();
-        var error = await process.StandardError.ReadToEndAsync();
-        var exitCode = process.ExitCode;
+        var process = _processFactory();
+        var output = await process.ExecuteAsync("powershell.exe", "-Command Get-VpnConnection");
 
         var result = output.Split(Environment.NewLine).Where(x => x.StartsWith("Name"));
 
