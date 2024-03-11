@@ -13,7 +13,7 @@ public class VpnProvider : IVpnProvider
     public async Task<bool> ConnectAsync(string connection)
     {
         var process = _processFactory();
-        await process.ExecuteAsync("cmd.exe", "/c rasdial", connection);
+        await process.ExecuteAsync("cmd.exe", "/c", "rasdial", $"\"{connection}\"");
 
         return true;
     }
@@ -21,7 +21,7 @@ public class VpnProvider : IVpnProvider
     public async Task<IReadOnlyCollection<string>> GetConnectionsAsync()
     {
         var process = _processFactory();
-        var output = await process.ExecuteAsync("powershell.exe", "-Command Get-VpnConnection");
+        var output = await process.ExecuteAsync("powershell.exe", "-Command", "Get-VpnConnection");
 
         var result = output.Split(Environment.NewLine).Where(x => x.StartsWith("Name"));
 
