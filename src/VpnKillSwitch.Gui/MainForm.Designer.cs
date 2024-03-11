@@ -34,6 +34,7 @@ partial class MainForm
         checkBox1 = new CheckBox();
         comboBox1 = new ComboBox();
         button2 = new Button();
+        button3 = new Button();
         groupBox1.SuspendLayout();
         SuspendLayout();
         // 
@@ -102,11 +103,22 @@ partial class MainForm
         button2.UseVisualStyleBackColor = true;
         button2.Click += button2_Click;
         // 
+        // button3
+        // 
+        button3.Location = new Point(15, 151);
+        button3.Name = "button3";
+        button3.Size = new Size(75, 23);
+        button3.TabIndex = 5;
+        button3.Text = "Connect";
+        button3.UseVisualStyleBackColor = true;
+        button3.Click += button3_Click;
+        // 
         // MainForm
         // 
         AutoScaleDimensions = new SizeF(7F, 15F);
         AutoScaleMode = AutoScaleMode.Font;
         ClientSize = new Size(488, 303);
+        Controls.Add(button3);
         Controls.Add(button2);
         Controls.Add(comboBox1);
         Controls.Add(groupBox1);
@@ -126,4 +138,5 @@ partial class MainForm
     private Label label1;
     private ComboBox comboBox1;
     private Button button2;
+    private Button button3;
 }

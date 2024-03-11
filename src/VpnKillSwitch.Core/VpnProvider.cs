@@ -5,9 +5,22 @@ using System.Text.RegularExpressions;
 namespace VpnKillSwitch.Core;
 public class VpnProvider : IVpnProvider
 {
-    public Task<bool> ConnectAsync(string connection)
+    public async Task<bool> ConnectAsync(string connection)
     {
-        throw new NotImplementedException();
+        using var process = new Process();
+        process.StartInfo.FileName = "cmd.exe";
+        process.StartInfo.Arguments = $"/c rasdial \"{connection}\"";
+        process.StartInfo.CreateNoWindow = true;
+        process.StartInfo.RedirectStandardOutput = true;
+        process.StartInfo.RedirectStandardError = true;
+
+        process.Start();
+
+        await process.WaitForExitAsync();
+
+        var result = await process.StandardOutput.ReadToEndAsync();
+
+        return true;
     }
 
     public async Task<IReadOnlyCollection<string>> GetConnectionsAsync()
