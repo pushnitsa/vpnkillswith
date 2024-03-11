@@ -1,34 +1,25 @@
-using System.Diagnostics;
+using VpnKillSwitch.Core;
 
 namespace VpnKillSwitch.Gui;
 
 public partial class MainForm : Form
 {
-    public MainForm()
+    private readonly IVpnProvider _vpnProvider;
+
+    public MainForm(IVpnProvider vpnProvider)
     {
         InitializeComponent();
+        _vpnProvider = vpnProvider;
     }
 
     private void button1_Click(object sender, EventArgs e)
     {
+
     }
 
     private async void button2_Click(object sender, EventArgs e)
     {
-        using var process = new Process();
-        process.StartInfo.FileName = "powershell.exe";
-        process.StartInfo.Arguments = "-Command Get-VpnConnection";
-        process.StartInfo.CreateNoWindow = true;
-        process.StartInfo.RedirectStandardOutput = true;
-        process.StartInfo.RedirectStandardError = true;
-
-        process.Start();
-
-        await process.WaitForExitAsync();
-
-        var output = await process.StandardOutput.ReadToEndAsync();
-        var error = await process.StandardError.ReadToEndAsync();
-        var exitCode = process.ExitCode;
-
+        var connections = await _vpnProvider.GetConnectionsAsync();
+        comboBox1.Items.AddRange(connections.ToArray());
     }
 }
