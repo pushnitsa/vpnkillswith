@@ -70,6 +70,7 @@ partial class MainForm
         Controls.Add(button3);
         Controls.Add(button2);
         Controls.Add(comboBox1);
+        FormBorderStyle = FormBorderStyle.FixedSingle;
         Margin = new Padding(3, 2, 3, 2);
         MaximizeBox = false;
         Name = "MainForm";
